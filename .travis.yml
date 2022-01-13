@@ -1,3 +1,4 @@
+language: generic
 sudo: required
 services:
   docker
@@ -6,7 +7,7 @@ services:
     - docker build -t snaky912/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run snaky912/react-test npm test -- --coverage
+  - docker run -e CI=true snaky912/react-test npm test
 
 after_success:
   - docker build -t snaky912/multi-client ./client
